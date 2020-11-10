@@ -4,6 +4,8 @@ import * as productService from '../services/products';
 import { makeErrorResponse, makeSuccessResponse } from '../utils/response';
 
 export const getProductsList: APIGatewayProxyHandler = async (_, _context) => {
+  console.log('getProductsList');
+
   try {
     const products = await productService.getProductsList();
 
