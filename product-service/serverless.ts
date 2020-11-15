@@ -14,7 +14,6 @@ const serverlessConfiguration: Serverless = {
       includeModules: true
     }
   },
-  // Add the serverless-webpack plugin
   plugins: ['serverless-webpack'],
   provider: {
     name: 'aws',
@@ -26,6 +25,11 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      PG_HOST: 'shop.c85cvsfl0zex.eu-west-1.rds.amazonaws.com',
+      RG_PORT: 5432,
+      PG_DATABASE: 'shop',
+      PG_USERNAME: 'postgres',
+      PG_PASSWORD: '',
     },
   },
   functions: {
@@ -47,6 +51,18 @@ const serverlessConfiguration: Serverless = {
         {
           http: {
             method: 'get',
+            path: 'products',
+            cors: true,
+          }
+        }
+      ]
+    },
+    createProduct: {
+      handler: 'handler.createProduct',
+      events: [
+        {
+          http: {
+            method: 'post',
             path: 'products',
             cors: true,
           }
