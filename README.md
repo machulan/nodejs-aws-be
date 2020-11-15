@@ -10,3 +10,9 @@ npm i -g serverless
 cd product-service
 npm i 
 ```
+
+# deployment
+
+```
+sls deploy
+```
