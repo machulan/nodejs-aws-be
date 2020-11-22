@@ -9,4 +9,13 @@ Node.js 12.x
 npm i -g serverless
 cd product-service
 npm i 
+cd ..
+cd import-service
+npm i 
+```
+
+# deployment
+
+```
+sls deploy
 ```
