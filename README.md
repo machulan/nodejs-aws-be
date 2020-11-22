@@ -1,4 +1,4 @@
-Node.js AWS backend for product shop
+Node.js AWS backend for book shop
 
 # requirements
 
