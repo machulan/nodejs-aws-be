@@ -33,12 +33,23 @@ const serverlessConfiguration: Serverless = {
         Action: 's3:*',
         Resource: `arn:aws:s3:::${BUCKET_PARAMS.name}/*`,
       },
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        // Resource: '${cf:product-service-${self:provider.stage}.SQSArn}',
+        Resource: {
+          'Fn::ImportValue': 'SQSArn',
+        },
+      },
     ],
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      SQS_URL: {
+        'Fn::ImportValue': 'SQSUrl',
+      },
     },
   },
   functions: {

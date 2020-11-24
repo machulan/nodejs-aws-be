@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "aws-sdk": "^2.798.0",
     "pg": "^8.4.2",
     "source-map-support": "^0.5.10"
   },
@@ -24,7 +25,7 @@
     "ts-jest": "^26.4.3",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.10.2",
-    "typescript": "^3.2.4",
+    "typescript": "^3.8.3",
     "webpack": "^4.29.0",
     "webpack-node-externals": "^1.7.2"
   },

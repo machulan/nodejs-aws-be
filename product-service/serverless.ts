@@ -20,6 +20,25 @@ const serverlessConfiguration: Serverless = {
     runtime: 'nodejs12.x',
     stage: 'dev',
     region: 'eu-west-1',
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: {
+          'Fn::GetAtt': [
+            'SQSQueue',
+            'Arn',
+          ],
+        },
+      },
+      {
+        Effect: 'Allow',
+        Action: 'sns:*',
+        Resource: {
+          Ref: 'SNSTopic',
+        },
+      },
+    ],
     apiGateway: {
       minimumCompressionSize: 1024,
     },
@@ -30,6 +49,12 @@ const serverlessConfiguration: Serverless = {
       PG_DATABASE: 'shop',
       PG_USERNAME: 'postgres',
       PG_PASSWORD: '',
+      SQS_URL: {
+        Ref: 'SQSQueue',
+      },
+      SNS_ARN: {
+        Ref: 'SNSTopic',
+      },
     },
   },
   functions: {
@@ -68,8 +93,71 @@ const serverlessConfiguration: Serverless = {
           }
         }
       ]
+    },
+    catalogBatchProcess: {
+      handler: 'handler.catalogBatchProcess',
+      events: [
+        {
+          sqs: {
+            batchSize: 5,
+            arn: { 
+              'Fn::GetAtt': [
+                'SQSQueue',
+                'Arn',
+              ],
+            },
+          }
+        }
+      ]
     }
-  }
+  },
+  resources: {
+    Resources: {
+      SQSQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: {
+          QueueName: 'catalogItemsQueue',
+        },
+      },
+      SNSTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: {
+          TopicName: 'createProductTopic',
+        },
+      },
+      SNSSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'nik.machula.aws@gmail.com',
+          Protocol: 'email',
+          TopicArn: {
+            Ref: 'SNSTopic',
+          },
+        },
+      },
+    },
+    Outputs: {
+      SQSUrl: {
+        Value: {
+          Ref: 'SQSQueue',
+        },
+        Export: {
+          Name: 'SQSUrl',
+        },
+      },
+      SQSArn: {
+        Value: {
+          'Fn::GetAtt': [
+            'SQSQueue', 
+            'Arn',
+          ],
+        },
+        Export: {
+          Name: 'SQSArn',
+        },
+      },
+    },
+  },
 }
 
 module.exports = serverlessConfiguration;
