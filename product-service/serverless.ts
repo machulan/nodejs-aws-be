@@ -133,6 +133,26 @@ const serverlessConfiguration: Serverless = {
           TopicArn: {
             Ref: 'SNSTopic',
           },
+          FilterPolicy: {
+            status: [
+              'created',
+            ],
+          },
+        },
+      },
+      SNSErrorSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'nik.machula.bz@gmail.com',
+          Protocol: 'email',
+          TopicArn: {
+            Ref: 'SNSTopic',
+          },
+          FilterPolicy: {
+            status: [
+              'not created',
+            ],
+          },
         },
       },
     },

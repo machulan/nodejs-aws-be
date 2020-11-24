@@ -19,11 +19,39 @@ export const catalogBatchProcess: SQSHandler = async (event: SQSEvent) => {
   const createdBooks = newBooks
     .filter((promise) => promise.status === 'fulfilled')
     .map((promise: PromiseFulfilledResult<Book>) => promise.value);
-  console.log('catalogBatchProcess createdBooks', JSON.stringify(createdBooks));
+  const notCreatedBooks = newBooks
+    .filter((promise) => promise.status === 'rejected')
+    .map((promise: PromiseRejectedResult) => promise.reason);
 
-  await sns.publish({
-    Subject: `${createdBooks.length} of ${newBooks.length} books were saved in database`,
-    Message: JSON.stringify(createdBooks),
-    TopicArn: snsTopicArn,
-  }).promise();
+  if (createdBooks.length) {
+    console.log('catalogBatchProcess createdBooks', JSON.stringify(createdBooks));
+
+    await sns.publish({
+      Subject: `${createdBooks.length} of ${newBooks.length} books were saved in database`,
+      Message: JSON.stringify(createdBooks),
+      TopicArn: snsTopicArn,
+      MessageAttributes: {
+        status: {
+          DataType: 'String',
+          StringValue: 'created',
+        },
+      },
+    }).promise();
+  }
+
+  if (notCreatedBooks.length) {
+    console.log('catalogBatchProcess notCreatedBooks', JSON.stringify(notCreatedBooks));
+
+    await sns.publish({
+      Subject: `${notCreatedBooks.length} of ${newBooks.length} books were not saved in database`,
+      Message: JSON.stringify(notCreatedBooks),
+      TopicArn: snsTopicArn,
+      MessageAttributes: {
+        status: {
+          DataType: 'String',
+          StringValue: 'not created',
+        },
+      },
+    }).promise();
+  }
 }
