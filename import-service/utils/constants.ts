@@ -4,4 +4,7 @@ export const BUCKET_PARAMS = {
     parsedFilesPrefix: 'parsed',
     region: 'eu-west-1',
 };
-  
+
+export const SQS_PARAMS = {
+    region: 'eu-west-1',
+};

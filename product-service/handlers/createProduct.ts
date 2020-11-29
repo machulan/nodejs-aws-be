@@ -1,7 +1,7 @@
 import * as Joi from '@hapi/joi';
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import 'source-map-support/register';
-import { BookDTO } from '../models';
+import { Book, BookDTO } from '../models';
 import * as productService from '../services/products';
 import { makeErrorResponse, makeSuccessResponse, makeBadRequestResponse } from '../utils/response';
 
@@ -36,12 +36,14 @@ export const createProduct: APIGatewayProxyHandler = async (event, _context) => 
     }
 
     const newBookDTO = data as BookDTO;
-    const newBookId = await productService.createProduct(newBookDTO);
+    const newBook: Book = await productService.createProduct(newBookDTO);
 
     return makeSuccessResponse({
       body: {
         message: 'New book was added',
-        id: newBookId,
+        book: {
+          ...newBook,
+        },
       },
     });
   } catch (e) {

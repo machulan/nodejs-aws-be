@@ -75,7 +75,7 @@ const getProductsList = async (): Promise<Book[]> => {
   }
 };
 
-const createProduct = async (book: BookDTO): Promise<string> => {
+const createProduct = async (book: BookDTO): Promise<Book> => {
   const {
     title,
     description,
@@ -94,7 +94,11 @@ const createProduct = async (book: BookDTO): Promise<string> => {
     await dbClient.query(CREATE_PRODUCT_STOCK_QUERY, [newBookId, count]);
 
     await dbClient.query('COMMIT');
-    return newBookId;
+
+    return {
+      ...book,
+      id: newBookId,
+    };
   } catch (error) {
       console.error('Error during database request executing:', error);
       await dbClient.query('ROLLBACK');
