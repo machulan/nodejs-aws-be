@@ -100,7 +100,7 @@ const serverlessConfiguration: Serverless = {
         {
           sqs: {
             batchSize: 5,
-            arn: { 
+            arn: {
               'Fn::GetAtt': [
                 'SQSQueue',
                 'Arn',
@@ -168,7 +168,7 @@ const serverlessConfiguration: Serverless = {
       SQSArn: {
         Value: {
           'Fn::GetAtt': [
-            'SQSQueue', 
+            'SQSQueue',
             'Arn',
           ],
         },
