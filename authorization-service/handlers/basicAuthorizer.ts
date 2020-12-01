@@ -4,7 +4,7 @@ import 'source-map-support/register';
 const isValidUser = (username: string, password: string) => {
   const rightPassword: string = process.env[username];
 
-  return rightPassword === password;
+  return username && rightPassword && rightPassword === password;
 };
 
 function generatePolicy(
