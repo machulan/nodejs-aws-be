@@ -19,3 +19,9 @@ npm i
 ```
 sls deploy
 ```
+
+# create a service
+
+```
+serverless create --template aws-nodejs-typescript --path <service-name>
+```

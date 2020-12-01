@@ -1,32 +1,24 @@
 {
-  "name": "product-service",
+  "name": "authorization-service",
   "version": "1.0.0",
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "test": "jest --config ./jest.config.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "aws-sdk": "^2.798.0",
-    "pg": "^8.4.2",
     "source-map-support": "^0.5.10"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
-    "@types/hapi__joi": "^17.1.6",
-    "@types/jest": "^26.0.15",
     "@types/node": "^10.12.18",
-    "@types/pg": "^7.14.6",
     "@types/serverless": "^1.72.5",
     "fork-ts-checker-webpack-plugin": "^3.0.1",
-    "jest": "^26.6.1",
     "serverless-dotenv-plugin": "^3.1.0",
     "serverless-webpack": "^5.2.0",
-    "ts-jest": "^26.4.3",
     "ts-loader": "^5.3.3",
     "ts-node": "^8.10.2",
-    "typescript": "^3.8.3",
+    "typescript": "^3.2.4",
     "webpack": "^4.29.0",
     "webpack-node-externals": "^1.7.2"
   },

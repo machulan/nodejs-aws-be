@@ -14,7 +14,7 @@ const serverlessConfiguration: Serverless = {
       includeModules: true
     }
   },
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-webpack', 'serverless-dotenv-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
@@ -44,11 +44,11 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      PG_HOST: 'shop.c85cvsfl0zex.eu-west-1.rds.amazonaws.com',
-      RG_PORT: 5432,
-      PG_DATABASE: 'shop',
-      PG_USERNAME: 'postgres',
-      PG_PASSWORD: '',
+      PG_HOST: process.env.PG_HOST,
+      RG_PORT: process.env.RG_PORT,
+      PG_DATABASE: process.env.PG_DATABASE,
+      PG_USERNAME: process.env.PG_USERNAME,
+      PG_PASSWORD: process.env.PG_PASSWORD,
       SQS_URL: {
         Ref: 'SQSQueue',
       },
