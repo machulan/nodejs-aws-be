@@ -19,8 +19,24 @@ npm i
 
 # deployment
 
+## authorization/import/product services
 ```
 sls deploy
+```
+
+## BFF service (created with no Serverless)
+
+### AWS Elastic Beanstalk app initialization
+```
+npm run eb-init
+```
+### AWS Elastic Beanstalk app creation
+```
+npm run eb-create
+```
+### AWS Elastic Beanstalk app deletion
+```
+npm run eb-terminate
 ```
 
 # create a service
