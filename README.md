@@ -9,9 +9,12 @@ Node.js 12.x
 npm i -g serverless
 cd product-service
 npm i 
-cd ..
-cd import-service
-npm i 
+cd ../import-service
+npm i
+cd ../authorization-service
+npm i
+cd ../bff-service
+npm i
 ```
 
 # deployment
