@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "eb-init": "eb init nikinsta-bff-api --platform node.js --region us-east-1",
-    "eb-create": "eb create development --cname nikinsta-bff-api-development --single"
+    "eb-init": "eb init nikinsta-bff-api --platform node.js --region us-east-2",
+    "eb-create": "eb create development --cname nikinsta-bff-api-development --single",
+    "eb-terminate": "eb terminate development"
   },
   "author": "",
   "license": "ISC",
