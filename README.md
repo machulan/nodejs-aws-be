@@ -13,6 +13,8 @@ cd ../import-service
 npm i
 cd ../authorization-service
 npm i
+cd ../bff-service
+npm i
 ```
 
 # deployment
