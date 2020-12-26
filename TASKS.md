@@ -106,6 +106,10 @@ Node.js in AWS cloud 2020 mentoring in RSSchool
 
 [Backend PR 6](https://github.com/nikinsta/nodejs-aws-be/pull/6)
 
+## Next steps
+
+See at [link](https://github.com/rolling-scopes-school/nodejs-aws-tasks/blob/main/NextSteps.png)
+
 # Pull requests (main)
 
 - [Task 2 - Serve SPA in AWS](https://github.com/nikinsta/nodejs-aws-fe/pull/1)
